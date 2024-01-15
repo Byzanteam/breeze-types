@@ -1,1 +1,1 @@
-# jet-plugin-js
+# TypeScript type definitions for BreezeRuntime
