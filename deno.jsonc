@@ -3,13 +3,16 @@
   "compilerOptions": {
     "strict": true,
     "useUnknownInCatchVariables": true,
-    "noImplicitOverride": true
+    "noImplicitOverride": true,
+    "types": [
+      "./mod.d.ts"
+    ]
   },
   "exclude": [
     ".git"
   ],
   "tasks": {
-    "test": "deno test -A --allow-none --shuffle --parallel",
+    "test": "deno check types_test.ts",
     "check:types": "deno check **/*.ts",
     "check": "deno fmt --check && deno lint && deno task check:types && deno task test"
   }
