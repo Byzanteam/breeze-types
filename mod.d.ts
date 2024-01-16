@@ -69,4 +69,28 @@ declare namespace BreezeRuntime {
    * A map of all plugins.
    */
   export const plugins: Record<string, Plugin>;
+
+  /**
+   * Provides an interface to handle HTTP request and responses over TCP connections.
+   * See detail at https://deno.land/api?s=Deno.serveHttp
+   * @example
+   * ```ts
+   * import { Hono } from "https://deno.land/x/hono@v3.4.1/mod.ts";
+   * const app = new Hono();
+   *
+   * app.get("/", (c) => c.text("Hello world!"));
+   * app.get("/greet/:name", (c) => {
+   *   const name = c.req.param("name");
+   *   return c.text(`Hi, ${name}`);
+   * });
+   * app.notFound((c) => {
+   *   return c.text("Not found", 404);
+   * });
+   *
+   * BreezeRuntime.serveHttp(app.fetch);
+   * ```
+   */
+  export function serveHttp(
+    handler: (req: Request) => Response | Promise<Response>,
+  ): void;
 }
