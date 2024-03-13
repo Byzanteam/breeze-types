@@ -2,11 +2,8 @@ import { getEnvOrThrow } from "./runtime.ts";
 
 export function buildUrl(
   path: string,
-  baseUrl: string | undefined = getBaseUrl(),
+  baseUrl: string = getBaseUrl(),
 ): string {
-  if (!baseUrl) {
-    return path.startsWith("/") ? path : `/${path}`;
-  }
   const normalizedBaseUrl = baseUrl.replace(/\/*$/, "");
   const normalizedPath = path.replace(/^\/*|\/*$/g, "");
   return `${normalizedBaseUrl}/${normalizedPath}`;
@@ -20,7 +17,7 @@ export function joinPath(...paths: string[]): string {
   return `/${normalizedPaths}`;
 }
 
-export function getBaseUrl(): string | undefined {
+export function getBaseUrl(): string {
   const host = getEnvOrThrow("JET_BREEZE_HOST");
   const pathPrefix = getEnvOrThrow("JET_BREEZE_PATH_PREFIX");
 
