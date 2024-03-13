@@ -10,7 +10,7 @@ Add types into your deno config file(eg: `deno.jsonc`):
   "compilerOptions": {
     "types": [
       // add types of BreezeRuntime
-      "https://cdn.jsdelivr.net/gh/Byzanteam/breeze-ts-types@latest/mod.d.ts"
+      "https://cdn.jsdelivr.net/gh/Byzanteam/breeze-js@latest/mod.d.ts"
     ]
   }
 }
