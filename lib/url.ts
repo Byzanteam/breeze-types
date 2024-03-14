@@ -6,7 +6,8 @@ export function buildUrl(
 ): string {
   const normalizedBaseUrl = baseUrl.replace(/\/*$/, "");
   const normalizedPath = path.replace(/^\/*|\/*$/g, "");
-  return `${normalizedBaseUrl}/${normalizedPath}`;
+
+  return `${normalizedBaseUrl}${normalizedPath ? `/${normalizedPath}` : ""}`;
 }
 
 export function joinPath(...paths: string[]): string {

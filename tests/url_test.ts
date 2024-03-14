@@ -86,4 +86,11 @@ describe("getBaseUrl function", () => {
     const expected = "http://example.com/subpath/api";
     assertEquals(getBaseUrl(), expected);
   });
+
+  it("should avoid slashes when JET_BREEZE_PATH_PREFIX is just a slash", () => {
+    setEnv("JET_BREEZE_HOST", "http://example.com/");
+    setEnv("JET_BREEZE_PATH_PREFIX", "/");
+    const expected = "http://example.com";
+    assertEquals(getBaseUrl(), expected);
+  });
 });
