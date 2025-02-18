@@ -19,7 +19,7 @@ declare namespace BreezeRuntime {
     /**
      * The instance name of plugin.
      */
-    plugin: string;
+    plugin?: string;
   }
 
   export function getDeploymentInfo(): DeploymentInfo;
