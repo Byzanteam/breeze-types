@@ -5,55 +5,36 @@ import {
   IsNullable,
 } from "https://deno.land/std@0.212.0/testing/types.ts";
 
-// env
 {
-  // get
-  {
-    const value = BreezeRuntime.env.get("foo");
+  type Result = ReturnType<typeof BreezeRuntime.getDeploymentInfo>;
 
-    assertType<IsNullable<typeof value>>(true);
-    assertType<Has<typeof value, string>>(true);
-  }
-
-  // toObject
-  {
-    const values = BreezeRuntime.env.toObject();
-
-    assertType<IsExact<typeof values, Record<string, string | undefined>>>(
-      true,
-    );
-  }
-
-  // has
-  {
-    const value = BreezeRuntime.env.has("foo");
-
-    assertType<IsExact<typeof value, boolean>>(true);
-  }
+  assertType<IsExact<Result, BreezeRuntime.DeploymentInfo>>(true);
 }
 
-// plugins
 {
-  // get a plugin
-  {
-    const plugin = BreezeRuntime.plugins.kv;
+  type Name = Parameters<typeof BreezeRuntime.getPlugin>[0];
+  type Result = ReturnType<typeof BreezeRuntime.getPlugin>;
 
-    assertType<IsExact<typeof plugin, BreezeRuntime.Plugin>>(true);
-  }
-
-  // getEndpoint
-  {
-    const result = BreezeRuntime.plugins.kv.getEndpoint();
-
-    assertType<IsExact<typeof result, Promise<URL>>>(true);
-  }
+  assertType<IsExact<Name, string>>(true);
+  assertType<Has<Result, BreezeRuntime.Plugin>>(true);
+  assertType<IsNullable<Result>>(true);
 }
 
-// serveHttp
 {
-  type Params = Parameters<typeof BreezeRuntime.serveHttp>[0];
+  type Options = Parameters<typeof BreezeRuntime.generateToken>[0];
+  type Result = ReturnType<typeof BreezeRuntime.generateToken>;
 
-  assertType<
-    IsExact<Params, (req: Request) => Response | Promise<Response>>
-  >(true);
+  assertType<Has<Options, BreezeRuntime.TokenOptions>>(true);
+  assertType<IsNullable<Options>>(true);
+  assertType<IsExact<Result, string>>(true);
+}
+
+{
+  type Name = Parameters<typeof BreezeRuntime.pluginFetch>[0];
+  type Options = Parameters<typeof BreezeRuntime.pluginFetch>[1];
+  type Result = ReturnType<typeof BreezeRuntime.pluginFetch>;
+
+  assertType<IsExact<Name, string>>(true);
+  assertType<Has<Options, RequestInit>>(true);
+  assertType<IsExact<Result, Promise<Response>>>(true);
 }
