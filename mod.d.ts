@@ -28,8 +28,18 @@ declare namespace BreezeRuntime {
 
   export function generateToken(opts?: TokenOptions): Token;
 
+  export function pluginFetch(plugin: string): Promise<Response>;
+
+  export function pluginFetch(plugin: string, path: string): Promise<Response>;
+
   export function pluginFetch(
     plugin: string,
+    opts: RequestInit,
+  ): Promise<Response>;
+
+  export function pluginFetch(
+    plugin: string,
+    path: string,
     opts: RequestInit,
   ): Promise<Response>;
 }
