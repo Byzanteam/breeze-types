@@ -31,10 +31,14 @@ import {
 
 {
   type Name = Parameters<typeof BreezeRuntime.pluginFetch>[0];
-  type Options = Parameters<typeof BreezeRuntime.pluginFetch>[1];
+  type Path = Parameters<typeof BreezeRuntime.pluginFetch>[1];
+  type Options = Parameters<typeof BreezeRuntime.pluginFetch>[2];
   type Result = ReturnType<typeof BreezeRuntime.pluginFetch>;
 
   assertType<IsExact<Name, string>>(true);
-  assertType<Has<Options, RequestInit>>(true);
+  assertType<Has<Path, string> | Has<Path, RequestInit> | IsNullable<Path>>(
+    true,
+  );
+  assertType<Has<Options, RequestInit> | IsNullable<Options>>(true);
   assertType<IsExact<Result, Promise<Response>>>(true);
 }
